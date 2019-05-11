@@ -1,0 +1,113 @@
+.footer {
+  background: #27AE60;
+  text-align: center;
+  margin: 50px 0;
+  padding: 10px;
+  color: #999;
+}
+
+.content {
+  margin-top: 60px;
+}
+
+#canvas {
+  display: block;
+  border-radius: 3px;
+  background-color: transparent;
+  box-shadow: 0px 0px 15px 3px #ccc;
+  cursor:pointer;
+}
+
+.hoverImage:hover {
+  display: block;
+  box-shadow: 0px 0px 5px 3px #000;
+}
+
+.pColores {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pColores .pc {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+.pColores .gl {
+  display: inline-block;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+ #c1 {
+   background: #000;
+ }
+ #c2 {
+   background: #ffff00;
+ }
+ #c3 {
+   background: #ff0000;
+ }
+ #c4 {
+   background: #0000ff;
+ }
+ #c5 {
+   background: #00ff00;
+ }
+ #c6 {
+   background: #008000;
+ }
+ #c7 {
+   background: #00ffff;
+ }
+ #c8 {
+   background: #ff00ff;
+ }
+ #c9 {
+   background: #800080;
+ }
+ #c10 {
+   background: #fff;
+ }
+ #c11 {
+   background: #9033FF;
+ }
+ #gl1 {
+  background: #000;
+  width: 2px;
+  height: 2px;
+  margin: 13px auto;
+ }
+ #gl2 {
+   background: #000;
+   width: 5px;
+   height: 5px;
+   margin: 11px auto;
+ }
+ #gl3 {
+   background: #000;
+   width: 10px;
+   height: 10px;
+   margin: 9px auto;
+ }
+ #gl4 {
+   background: #000;
+   width: 15px;
+   height: 15px;
+   margin: 7px auto;
+ }
+ #gl5 {
+   background: #000;
+   width: 20px;
+   height: 20px;
+   margin: 4px auto;
+ }
+#miarchivo{
+  border-radius: 5px;
+  border: none;
+}

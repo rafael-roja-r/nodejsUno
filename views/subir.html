@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block titulo %}
+	Imágenes
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-info">
+            <p>Imagen subida por: <strong>{{usuario}}</strong></p>
+            <a href="/canvas?img={{src}}"><img src="{{src}}" alt="" class="hoverImage"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+    </script>
+
+{% endblock %}

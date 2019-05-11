@@ -1,0 +1,183 @@
+{% extends 'layout.html' %}
+
+{% block titulo %}
+	Imagen
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="panel panel-info">
+            <div class="panel-heading">Imagen cargada</div>
+            <div class="panel-body">
+              <div>
+              	<canvas id="canvas" width="400" height="500">
+              		
+              	</canvas>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <form id="form">
+                <div class="input-group">
+                  <ul class="pColores">
+                  	<li id="c1" class="pc" onclick="c1();"></li>
+					<li id="c2" class="pc" onclick="c2();"></li>
+					<li id="c3" class="pc" onclick="c3();"></li>
+					<li id="c8" class="pc" onclick="c8();"></li>
+					<li id="c9" class="pc" onclick="c9();"></li>
+					<li id="c11" class="pc" onclick="c11();"></li>
+					<li id="c10" class="pc" onclick="c10();"></li>
+                  </ul>
+					<ul class="pColores">
+						<li class="gl" onclick="gl1();"><div id="gl1"></div></li>
+						<li class="gl" onclick="gl2();"><div id="gl2"></div></li>
+						<li class="gl" onclick="gl3();"><div id="gl3"></div></li>
+						<li class="gl" onclick="gl4();"><div id="gl4"></div></li>
+						<li class="gl" onclick="gl5();"><div id="gl5"></div></li>
+					</ul>
+                  <span class="input-group-btn">
+                    <a class="btn btn-info" href="/lista">Cargar Imagen</a>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Usuarios en Línea</div>
+            <div class="panel-body">
+              <ul class="media-list" id="cuerpo-online"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var socket = io();
+      var usuario = {{usuario | json_encode | safe}};
+			var color = '#000';
+			var tam = 2;
+      socket.emit('new user', usuario);
+
+      //Función para mostrar los usuarios
+
+      socket.on('new user', function (usuarios) {
+        $('#cuerpo-online').html('');
+        $.each(usuarios, function (i, usuario) {
+          $('#cuerpo-online').append($('<li>').text(usuario));
+        });
+      });
+
+			//Código para el canvas
+
+
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			var cw = canvas.width = 700,
+			  cx = cw / 2;
+			var ch = canvas.height = 600,
+			  cy = ch / 2;
+			imgCanvas();
+			var dibujar = false;
+			ctx.lineJoin = "round";
+
+			canvas.addEventListener('mousedown', function(evt) {
+			  dibujar = true;
+				imgCanvas();
+			  ctx.beginPath();
+
+			}, false);
+
+			canvas.addEventListener('mouseup', function(evt) {
+			  dibujar = false;
+
+			}, false);
+
+			canvas.addEventListener("mouseout", function(evt) {
+			  dibujar = false;
+			}, false);
+
+			canvas.addEventListener("mousemove", function(evt) {
+			  if (dibujar) {
+			    var m = oMousePos(canvas, evt);
+					ctx.strokeStyle = color;
+			    ctx.lineTo(m.x, m.y, 5, 5);
+					ctx.lineWidth = tam;
+			    ctx.stroke();
+			  }
+			}, false);
+
+			function oMousePos(canvas, evt) {
+			  var ClientRect = canvas.getBoundingClientRect();
+			  return { //objeto
+			    x: Math.round(evt.clientX - ClientRect.left),
+			    y: Math.round(evt.clientY - ClientRect.top)
+			  }
+			}
+
+			function imgCanvas () {
+				var canvas = document.getElementById("canvas");
+				var ctx = canvas.getContext("2d");
+				var img = new Image(700, 600);
+				img.src = '{{imgUsuario}}';
+				ctx.drawImage(img, 0, 0);
+			}
+
+			function c1 () {
+				color = "#000";
+			}
+			function c2 () {
+				color = "#ffff00";
+			}
+			function c3 () {
+				color = "#ff0000";
+			}
+			function c4 () {
+				color = "#0000ff";
+			}
+			function c5 () {
+				color = "#00ff00";
+			}
+			function c6 () {
+				color = "#008000";
+			}
+			function c7 () {
+				color = "#00ffff";
+			}
+			function c8 () {
+				color = "#ff00ff";
+			}
+			function c9 () {
+				color = "#800080";
+			}
+			function c10 () {
+				color = "#fff";
+			}
+			function c11 () {
+				color = "#9033FF";
+			}
+			function gl1 () {
+				tam = 2;
+			}
+			function gl2 () {
+				tam = 5;
+			}
+			function gl3 () {
+				tam = 15;
+			}
+			function gl4 () {
+				tam = 25;
+			}
+			function gl5 () {
+				tam = 30;
+			}
+			$(document).ready(function(){
+				setTimeout(function(){
+					imgCanvas();
+				}, 100)
+			});
+    </script>
+
+{% endblock %}
